@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>OTes apply leave</title>
+
+    {% include 'head.html' %}
+
+  </head>
+
+  <body>
+
+
+   {% include 'navbar.html' %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron" id = "leave-jumbotron">
+      <div class="container">
+        <h2>Leave Tracker</h2>
+        <hr>
+        <div class="row" id="calendar-row">
+           <div class="col-xs-12" id="calendar-div">
+              <table id ="calen-head">
+                <tr>
+                  <td width="20%" align="left">
+                     &lt;&lt; <a href="/leave/{{PreviousYear}}-{{PreviousMonth}}/">{{PreviousMonthName}} {{PreviousYear}}</a>
+                  </td>
+                  <td width="20%" align="left">
+                     &lt;&lt; <a href="/leave/{{YearBeforeThis}}-{{Month}}/">{{MonthName}} {{YearBeforeThis}}</a>
+                  </td>
+                  <td width="20%" align="center"><a href="/leave">Today</a></td>
+                  <td width="20%" align="right">
+                    <a href="/leave/{{YearAfterThis}}-{{Month}}/">{{MonthName}} {{YearAfterThis}}</a> &gt;&gt;
+                  </td>
+                  <td width="20%" align="right">
+                    <a href="/leave/{{NextYear}}-{{NextMonth}}/">{{NextMonthName}} {{NextYear}}</a> &gt;&gt;
+                  </td>
+                </tr>
+              </table>
+              <div id="calendar">
+                {{calendar}}
+              </div>
+            </div>
+          </div>
+        <div id="div-manageleave">
+          <a href="/manageleave" class="pull-right"><button type = "button" class = "btn btn-success">Manage leave</button></a>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>
+    $("#nav-leave").addClass("active");
+    </script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+  </body>
+</html>

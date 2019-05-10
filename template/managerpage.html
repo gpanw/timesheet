@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>OTes user profile</title>
+
+    {% include 'head.html' %}
+    <link href="{% static 'css/justified-nav.css' %} " rel="stylesheet">
+
+  </head>
+
+  <body>
+
+
+   {% include 'navbar.html' %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+   {% include 'managernavbar.html' %}
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <hr>
+
+    </div> <!-- /container -->
+
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>
+       $("#nav-managerpage").addClass("active");
+    </script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+    <!--  <script src="{% static 'js/leave.js' %}"></script> -->
+  </body>
+</html>

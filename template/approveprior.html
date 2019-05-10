@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>OTes approve priortime</title>
+
+    {% include 'head.html' %}
+
+  </head>
+
+  <body>
+
+
+   {% include 'navbar.html' %}
+
+  <div id="wrapper" class="menuDisplayed">
+    <div id="reports-mainpage-header">
+      <h3>
+        <div class="row">
+          <div class="col-xs-6">
+            Approve Prior Timesheets
+          </div>
+          <div class="col-sm-2 col-sm-offset-4 col-xs-6">
+            <h5 id={{ slug }} class="header-team-name">{{ team }}</h5>
+          </div>
+        </div>
+      </h3>
+      <span id="menu-toggle" class="glyphicon glyphicon-menu-right menu-toggle-shift mobile-no-display" aria-hidden="true"></span>
+    </div>
+    {% include 'sidebarnav.html' %}
+
+    <div id="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row user-list">
+          <div class = "col-sm-3 col-xs-6">
+              <select class="form-control" id="user-id">
+                  <option value="0">Team members list</option>
+                  {% for u in userlist %}
+                    <option value={{ u }}>{{ u }}</option>
+                  {% endfor %}
+              </select>
+          </div>
+        </div>
+        <br>
+        <div class="table-responsive manager-prior-table">
+           <h3> </h3>
+            <table class="table table-striped" id='task-table'>
+              <thead>
+                <tr>
+                  <th class="task">Task #</th>
+                  <th class="isbill">Billable</th>
+                  <th id="head-sat">Sat</th>
+                  <th id="head-sun">Sun</th>
+                  <th id="head-mon">Mon</th>
+                  <th id="head-tue">Tue</th>
+                  <th id="head-wed">Wed</th>
+                  <th id="head-thu">Thu</th>
+                  <th id="head-fri">Fri</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="timesheet-table">
+                <tr id="total">
+                  <td class="task">Total</td>
+                  <td class="isbill"></td>
+                  <td class="total-hours">0.0</td>
+                  <td class="total-hours">0.0</td>
+                  <td class="total-hours">0.0</td>
+                  <td class="total-hours">0.0</td>
+                  <td class="total-hours">0.0</td>
+                  <td class="total-hours">0.0</td>
+                  <td class="total-hours">0.0</td>
+                  <td class="total-hours">0.0</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+        <br>
+        <div class="row hide-div">
+           <div><h4>Date to be approved</h4><div class='pull-left week-list'></div></div>
+           <div class="pull-right">
+         <div class="radio">
+            <label><input type="radio" name="status" value="approve"><b>Approve</b>
+            </label>
+         </div>
+         <div class="radio">
+            <label><input type="radio" name="status" value="reject"><b>Reject</b></label>
+               </div>
+               <button class="btn btn-success btn-block submit-btn" id="approve-sheet" type="submit">Submit</button>
+           </div>
+        </div>
+
+        <hr>
+        <div class="save-status"></div>
+
+    </div> <!-- /container -->
+    </div>
+  </div>
+
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+    <script src="{% static 'js/approveprior.js' %}"></script>
+  </body>
+</html>

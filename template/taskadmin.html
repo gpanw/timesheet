@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>OTes Task Admin</title>
+
+    {% include 'head.html' %}
+
+  </head>
+
+  <body>
+
+
+   {% include 'navbar.html' %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron" id = "leave-jumbotron">
+      <div class="container">
+        <h3>Manage/Add Tasks </h3>
+        <hr>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+          <div class = "col-md-12">
+            <div class = "col-sm-3" id="taskadmin-search">
+              <input type="text" class="form-control taskadmin-search" list="taskadmin-taskList" placeholder="Search">
+              <datalist id="taskadmin-taskList">  
+              </datalist>
+            </div>
+          </div>
+          <br></br>
+          <div class = "col-md-12">
+            <table class="table table-striped" id='taskadmin-tasktable'>
+              <tbody id="user-table">
+                <tr>
+                  <td><b>Task</b></td>
+                  <td><b>Description</b></td>
+                  <td><b>Status</b></td>
+                  <td></td>
+                </tr>
+                {% for u in tasklist %}
+                <tr class="taskadmin-tasklist">
+                  <td class="taskadmin-tasname"><a>{{ u.task_name }}</a></td>
+                  <td class="taskadmin-taskdescription"><a>{{ u.task_description }}</a></td>
+                  <td class="taskadmin-taskstatus"><a>{{ u.get_task_status_display }}</a></td>
+                  <td class="taskadmin-function text-right">
+                      <button class="btn btn-xs btn-info taskadmin-edit" id="taskadmin-edit" type="submit">
+                        <a data-toggle="tooltip" title="Click to check detais of the tasks">
+                          <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                          </span>
+                        </a>
+                      </button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+<!-- SUB TASK MODAL -->
+      <div id="checksubtaskModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 class="modal-title">Sub Task</h3>
+            </div>
+            <div class="modal-body">
+              <table class="table table-striped" id="subtaskadmin-addtasktable">
+                <tbody id="taskadmin-addtasktbody">
+                  <tr>
+                    <td><b>Sub-Task</b></td>
+                    <td><b>Total Hours</b></td>
+                    <td><b>Status</b></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" id="taskadmin-addtaskbtn">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- END SUB TASK MODAL -->
+
+    </div>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+    <script src="{% static 'js/taskadmin.js' %}"></script>
+  </body>
+</html>

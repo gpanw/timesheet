@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>OTes Dashboard</title>
+    {% include 'head.html' %}
+  </head>
+
+  <body>
+{% include 'navbar.html' %}
+
+    <!-- report html -->
+  <div id="wrapper" class="menuDisplayed">
+    <div id="reports-mainpage-header">
+      <h3>
+        <div class="row">
+          <div class="col-xs-6">
+            Dashboard
+          </div>
+          <div class="col-sm-2 col-sm-offset-4 col-xs-6" id="header-team-name">
+            <select class="form-control" id="change-team">
+                          {% for t in team_list %}
+                              {% ifequal team t.team_name %}
+                                  <option value="{{ t.slug }}" selected>{{ t.team_name }}</option>   
+                              {% else %}
+                                  <option value="{{ t.slug }}">{{ t.team_name }}</option>
+                              {% endifequal %}
+                          {% endfor %}
+                          {% ifequal slug 'all' %}
+                            <option value="all" selected>All</option>
+                          {% else %}
+                            <option value="all">All</option>
+                          {% endifequal %}
+            </select>
+          </div>
+        </div>
+      </h3>
+      <span id="menu-toggle" class="glyphicon glyphicon-menu-right menu-toggle-shift mobile-no-display" aria-hidden="true"></span>
+    </div>
+    {% include 'sidebarnav.html' %}
+
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-3 dashboard">
+            <p>Team</p>
+            <p>
+              <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+              <span>{{team}}</span>
+            </p>
+          </div>
+          <div class="col-sm-3 dashboard">
+            <p>Team Size</p>
+            <p>
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              <span>{{team_size}}</span>
+            </p>
+          </div>
+          <div class="col-sm-3 dashboard">
+            <p>Billable Hours</p>
+            <p>
+              <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+              <span id='billable'>{{billable}}</span>
+            </p>
+          </div>
+          <div class="col-sm-3 dashboard">
+            <p>Non-Billable Hours</p>
+            <p>
+              <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+              <span id ='nonbillable'>{{non_billable}}</span>
+            </p>
+          </div>
+        </div> <!-- row div -->
+        <div class="row">
+          <div class="col-sm-3 timesheet-summary">
+            <h4 class="timesheet-summary-header">This week Timesheet</h4>
+            <table class="table table-striped" id='timesheet-summary-table'>
+              <thead>
+                <tr>
+                  <th class="summary-user-header">User Id</th>
+                  <th class="summary-hours-header">Hours</th>
+                </tr>
+              </thead>
+              {% for l, h  in user_list %}
+              <tbody id="timesheet-table">
+                <tr class="summary-rows">
+                  <td class="summary-user">{{l}}</td>
+                  <td class="summary-hours">{{h}}</td>
+                </tr>
+              </tbody>
+              {% endfor %}
+            </table>
+          </div>
+          <div class="col-sm-6 col-sm-offset-3 timesheet-summary">
+            <h4 class="timesheet-summary-header">This Week Summary
+              <!--<span class="col-sm-offset-6 expand">expand</span> -->
+            </h4>
+            <div class="box-content" id="task-graph">
+            </div>
+          </div>
+        </div> <!-- row div -->
+      </div>
+    </div>
+  </div>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+    <script src="{% static 'js/Chart.js' %}"></script>
+    <script src="{% static 'js/reports.js' %}"></script>
+  </body>
+</html>

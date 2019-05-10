@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>OTes Prior Time Adjustment</title>
+
+    {% include 'head.html' %}
+  </head>
+
+  <body>
+
+
+   {% include 'navbar.html' %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h2>Prior Time Adjustment</h2>
+        <hr>
+
+      <div class = "row">
+         <div class = "col-xs-6">
+            <div class = "input-group">
+            <input type = "text" class = "form-control" id = "selected-task" placeholder="Select tasks from dropdown" readonly>
+               <div class = "input-group-btn">
+                  <button type = "button" class = "btn btn-success dropdown-toggle"
+                     data-toggle = "dropdown" tabindex = "-1">
+                     <span class = "caret"></span>
+                     <span class = "sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class = "dropdown-menu dropdown-menu-right" id="task-list">
+                     {% for tasks in task_list %}
+                         <li class="task-item"><a><span class="taskname">{{tasks.task_name}}</span> | 
+                         {% if tasks.is_billable%}
+                             <span class="taskbillable">Billable</span></a></li>
+                         {% else %} 
+                             <span class="taskbillable">NonBillable</span></a></li>
+                         {% endif %}
+                     {% endfor %}
+                          <li class="task-item"><a><span class="taskname">Other - Tasks from other teams</span></a></li>
+                  </ul>
+               </div><!-- /btn-group -->
+
+            </div><!-- /input-group -->
+         </div><!-- /.col-xs-6 -->
+         <div class = "col-xs-6">
+            <div class = "input-group">
+            <input type = "text" class = "form-control" id = "selected-leave" placeholder="Select leaves from dropdown" readonly>
+               <div class = "input-group-btn">
+                  <button type = "button" class = "btn btn-success dropdown-toggle"
+                     data-toggle = "dropdown" tabindex = "-1">
+                     <span class = "caret"></span>
+                     <span class = "sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class = "dropdown-menu dropdown-menu-right" id="task-list">
+                     {% for leaves in leave_tasks %}
+                         <li class="leave-item">
+                            <a>
+                              <span class="leave-taskno">{{leaves.leave_id}}</span>
+                              <span class="leave-taskdesc"> - {{leaves.leave_description}}</span>
+                            </a>
+                          </li>
+                     {% endfor %}
+                  </ul>
+               </div><!-- /btn-group -->
+
+            </div><!-- /input-group -->
+         </div><!-- /.col-xs-6 -->
+      </div><!-- /.row -->
+
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped" id='task-table'>
+              <thead>
+                <tr>
+                  <th class="task">Task #</th>
+                  <th class="isbill">Billable</th>
+                  <th id="head-sat">Sat</th>
+                  <th id="head-sun">Sun</th>
+                  <th id="head-mon">Mon</th>
+				  <th id="head-tue">Tue</th>
+                  <th id="head-wed">Wed</th>
+                  <th id="head-thu">Thu</th>
+                  <th id="head-fri">Fri</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="timesheet-table">
+                <tr id="total">
+                  <td class="task">Total</td>
+                  <td class="isbill"></td>
+                  <td><input class="hours form-control" type="text" value=0.0 readonly></td>
+                  <td><input class="hours form-control" type="text" value=0.0 readonly></td>
+                  <td><input class="hours form-control" type="text" value=0.0 readonly></td>
+                  <td><input class="hours form-control" type="text" value=0.0 readonly></td>
+                  <td><input class="hours form-control" type="text" value=0.0 readonly></td>
+                  <td><input class="hours form-control" type="text" value=0.0 readonly></td>
+                  <td><input class="hours form-control" type="text" value=0.0 readonly></td>
+                  <td><input class="hours form-control total-day" type="text" value=0.0 readonly></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br>
+          <div>
+          <div class='pull-left week-list'>
+          </div>
+          <div>
+            <button class="btn btn-success btn-block submit-btn submit-sheet pull-right" id="submit-sheet" type="submit">Submit</button>
+          </div>
+          </div>
+          </div>
+
+      <hr>
+      <div class="save-status"></div>
+
+
+    <!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Add Tasks From Other Teams</h4>
+	      </div>
+	      <div class="modal-body">
+          <select class="form-control" id="other-team">
+              <option value="0">Team List</option>
+              {% for u in teamlist %}
+                <option value={{ u }}>{{ u }}</option>
+              {% endfor %}
+          </select>
+
+          <br>
+          <select class="form-control" id="other-task">
+              <option value="0">Select tasks</option>
+          </select>
+
+          <br>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" id="add-other-task">Add To timesheet</button>
+	      </div>
+	    </div>
+
+	  </div>
+     </div>
+
+    </div> <!-- /container -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+    <script src="{% static 'js/priortime.js' %}"></script>
+  </body>
+</html>

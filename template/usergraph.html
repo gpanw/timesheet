@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>OTes Graphs & Reports</title>
+
+    {% include 'head.html' %}
+    
+
+  </head>
+
+  <body>
+
+
+   {% include 'navbar.html' %}
+
+  <div id="wrapper" class="menuDisplayed">
+    <div id="reports-mainpage-header">
+      <h3>
+        <div class="row">
+          <div class="col-xs-6">
+            User reports
+          </div>
+          <div class="col-sm-2 col-sm-offset-4 col-xs-6">
+            <h5 class="header-team-name" id={{slug}}>{{ team }}</h5>
+          </div>
+        </div>
+      </h3>
+      <span id="menu-toggle" class="glyphicon glyphicon-menu-right menu-toggle-shift mobile-no-display" aria-hidden="true"></span>
+    </div>
+    {% include 'sidebarnav.html' %}
+
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 dashboard box-tag">
+              <div class="box-heading">
+                <h3>
+                  <span>Filter</span>
+                  <span class="box-filter">
+                    <select class="form-control" id="box-user-list">
+                      <option value="0">User List</option>
+                      {% for u in userlist %}
+                      <option value={{ u }}>{{ u }}</option>
+                      {% endfor %}
+                      <option value='all'>All</option>
+                    </select>
+                  </span>
+                </h3>
+              </div>
+            </div>
+        </div>
+        <div class="row hide-element" id="usercharts">
+          <div class="col-md-6 col-xs-12" id="uservstask">
+            <div class="col-xs-12 box-tag">
+              <div class="box-heading">
+                <h4>
+                  <span>User vs Tasks</span>
+                  <span id="box-glyph-uservstask-graph" class="glyphicon glyphicon-chevron-up box-glyph" aria-hidden="true"></span>
+                </h4>
+              </div>
+              <div class="box-content" id="uservstask-graph-content">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xs-12" id="uservssubtask">
+            <div class="col-xs-12 box-tag">
+              <div class="box-heading">
+                <h4>
+                  <span>User vs subTasks</span>
+                  <span id="box-glyph-uservssubtask-graph" class="glyphicon glyphicon-chevron-up box-glyph" aria-hidden="true"></span>
+                  <span class="box-filter">
+                  </span>
+                </h4>
+              </div>
+              <div class="box-content" id="uservssubtask-graph-content">
+              </div>
+            </div>
+          </div>
+        </div> <!-- /row -->
+      </div> <!-- /container -->
+    </div>
+  </div> <!-- /wrapper -->
+
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+    <script src="{% static 'js/Chart.js' %}"></script>
+    <script src="{% static 'js/usergraph.js' %}"></script>
+  </body>
+</html>

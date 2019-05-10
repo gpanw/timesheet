@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>OTes user profile</title>
+
+    {% include 'head.html' %}
+
+  </head>
+
+  <body>
+
+
+   {% include 'navbar.html' %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div id="wrapper" class="menuDisplayed">
+    <div id="reports-mainpage-header">
+      <h3>
+        <div class="row">
+          <div class="col-xs-6">
+            Team Information
+          </div>
+          <div class="col-sm-2 col-sm-offset-4 col-xs-6" id="header-team-name">
+            <h5 class="header-team-name" id="{{slug}}">{{ team }}</h5>
+          </div>
+        </div>
+      </h3>
+      <span id="menu-toggle" class="glyphicon glyphicon-menu-right menu-toggle-shift" aria-hidden="true"></span>
+    </div>
+    {% include 'sidebarnav.html' %}
+
+    <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <!-- Example row of columns -->
+      <div class="row">
+          <div class = "col-md-6 col-sm-12">
+             <h3 id="team-head">User Information <a class="edit">[edit]</a>
+             </h3>
+             <table class="table table-striped" id='user-profile'>
+			     <tbody id="user-table">
+			         <tr>
+			            <td class="user-id"><b>User Id</b></td>
+			            <td><select class="form-control" id="user-id">
+			                    <option value="0">Team members list</option>
+			                    {% for u in userlist %}
+			                       <option value={{ u }}>{{ u }}</option>
+			                    {% endfor %}
+							</select>
+					    </td>
+			         </tr>
+			         <tr>
+			            <td class="last-name"><b>Last Name </b></td>
+			            <td><input class="form-control" id="lastname" type="text" {{ lastname }} readonly></td>
+			         </tr>
+			         <tr>
+			            <td class="first-name"><b>First Name</b></td>
+			            <td><input class="form-control" id="firstname" type="text" {{ firstname }} readonly></td>
+			         </tr>
+			         <tr>
+			            <td class="emailid"><b>Email</b></td>
+			            <td><input class="form-control" id="email" type="text" {{ email }} readonly></td>
+			         </tr>
+			         <tr>
+			            <td class="Mobile"><b>Mobile</b></td>
+			            <td><input class="form-control" id="mobile" type="text" {{ mobile }} readonly></td>
+			         </tr>
+			         <tr>
+			            <td class="role"><b>Role</b></td>
+			            <td><select class="form-control" id="role" disabled="true">
+			                    <option value="0"></option>
+			                    {% for r in role_list %}
+			                       <option value="{{ r }}">{{ r }}</option>
+			                    {% endfor %}
+							</select>
+						</td>
+			         </tr>
+			         <tr>
+			            <td class="role"><b>Skill</b></td>
+			            <td><select class="form-control" id="skill" disabled="true">
+			                    <option value="0"></option>
+			                    {% for s in skill_list %}
+			                       <option value="{{ s }}">{{ s }}</option>
+			                    {% endfor %}
+							</select>
+						</td>
+			         </tr>
+			         <tr>
+			            <td class="manager"><b>Manager</b></td>
+			            <td><select class="form-control" id="manager_id" disabled="true">
+			                    <option value="0"></option>
+			                    {% for m in managerlist %}
+			                       <option value={{ m }}>{{ m }}</option>
+			                    {% endfor %}
+							</select>
+						</td>
+			         </tr>
+			         <tr>
+			            <td class="Projects"><b>Projects</b></td>
+			            <td><input class="form-control" id="project" type="text" {{ project }} readonly></td>
+			         </tr>
+			         <tr>
+			            <td class="Location"><b>Location</b></td>
+			            <td><input class="form-control" id="location" type="text" {{ location }} readonly></td>
+			         </tr>
+			         <tr>
+			            <td class="joined"><b>Joined On</b></td>
+			            <td><input class="form-control" id="joined" type="date" {{ joined }} readonly></td>
+			         </tr>
+			      </tbody>
+            </table>
+
+            </div>
+
+            <div class = "col-md-6 col-sm-12">
+
+             <h3>Leave Balance</h3>
+             <table class="table table-striped" id='leave-profile'>
+			     <tbody id="leave-table">
+                      <tr>
+                 		 <th></th>
+		                 <th>CL (in hours)</th>
+		                 <th>EL (in hours)</th>
+	                 </tr>
+			         <tr>
+			            <td>Leave Balance</td>
+			            <td class="balance-casual" id="casual"></td>
+			            <td class="balance-earned" id="earned"></td>
+			         </tr>
+			      </tbody>
+            </table>
+
+          </div>
+      </div>
+      <div class="save-status"></div>
+
+      <hr>
+
+    </div> <!-- /container -->
+	</div>
+	</div>
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+    <script src="{% static 'js/useradmin.js' %}"></script>
+  </body>
+</html>

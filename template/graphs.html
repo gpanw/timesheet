@@ -1,0 +1,386 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>OTes Graphs & Reports</title>
+
+    {% include 'head.html' %}
+  </head>
+
+  <body>
+   {% include 'navbar.html' %}
+  <div id="wrapper" class="menuDisplayed">
+    <div id="reports-mainpage-header">
+      <h3>
+        <div class="row">
+          <div class="col-xs-6">
+            Graphs
+          </div>
+          <div class="col-sm-2 col-sm-offset-4 col-xs-6">
+            <h5 class="header-team-name" id={{slug}}>{{ team }}</h5>
+          </div>
+        </div>
+      </h3>
+      <span id="menu-toggle" class="glyphicon glyphicon-menu-right menu-toggle-shift mobile-no-display" aria-hidden="true"></span>
+    </div>
+    {% include 'sidebarnav.html' %}
+
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+
+        <div class="row">
+          <h4>
+            Client dashboard
+          </h4>
+          <div class="col-sm-3 col-xs-12">
+            <div class="graph-feature box-tag">
+              <div class='graph-head' id="client-report">
+                <img src="{% static 'img/horizontal.png' %}" class="img-thumbnail graph-img" width="90%" height="90%">
+                <p class="graph-heading">Client Report</p>
+              </div>
+              <div class="graph-feature-text">
+                <p>Shows each project with number of employees. It helps you to see how empoyees are divided into different teams.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <h4>
+            Forecast & Management
+          </h4>
+          <div class="col-sm-3 col-xs-12">
+            <div class="graph-feature box-tag">
+              <div class='graph-head' id="skill-report">
+                <img src="{% static 'img/bargraph.png' %}" class="img-thumbnail graph-img" width="50%" height="50%">
+                <p class="graph-heading">Skill Workload Report</p>
+              </div>
+              <div class="graph-feature-text">
+                <p>Shows billable and non-billable hours for every skills. It helps you compare different skills in your project.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3 col-xs-12">
+            <div class="graph-feature box-tag">
+              <div class='graph-head' id="role-report">
+                <img src="{% static 'img/bargraph.png' %}" class="img-thumbnail graph-img" width="50%" height="50%">
+                <p class="graph-heading">Role Workload Report</p>
+              </div>
+              <div class="graph-feature-text">
+                <p>Shows billable and non-billable hours for employee role. It helps you see which role is most billable in your project.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4>
+            Team Charts
+          </h4>
+          <div class="col-sm-3 col-xs-12">
+            <div class="graph-feature box-tag">
+              <div class='graph-head' id="employee-report">
+                <img src="{% static 'img/piechart.png' %}" class="img-thumbnail graph-img" width="30%" height="30%">
+                <p class="graph-heading">Team Summary</p>
+              </div>
+              <div class="graph-feature-text">
+                <p>Shows the number of employees grouped by a specified field. It helps you see the breakdown of a project at a glance.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3 col-xs-12">
+            <div class="graph-feature box-tag">
+              <div class='graph-head' id="billable-report">
+                <img src="{% static 'img/linechart.png' %}" class="img-thumbnail graph-img" width="65%" height="65%">
+                <p class="graph-heading">Billable vs Non-Billable</p>
+              </div>
+              <div class="graph-feature-text">
+                <p>Shows billable and non-billable hours of a user. It helps you see how much billable a user is in your project.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="modalteamchart" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Breakdown of Employees</h4>
+            </div>
+            <br>
+            <div class='graph-filter row'>
+              <div class="col-xs-3 col-xs-offset-9">
+                <select class="form-control" id="groupby">
+                  <option value="basedon" readonly disabled>Based On</option>
+                  <option value="user_skill">Skill</option>
+                  <option value="user_role">Role</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-body" id="modal-piechart-graph">
+              <canvas id='modalpiechart'></canvas>
+            </div>
+            <div class="modal-footer">
+              <div class='show'><a id="show-all">show less</a></div>
+              <h3></h3>
+              <table class="table table-striped graph-table" id='graph-table'>
+              <thead>
+                <tr>
+                  <th class="graph-header-sno">Sno.</th>
+                  <th class="graph-header-head"></th>
+                  <th class="graph-header-value">No. of Employees</th>
+                </tr>
+              </thead>
+            </table>
+            </div> 
+          </div> <!-- modal content -->
+        </div> <!-- modal dialog -->
+      </div> <!-- modal -->
+
+      <div id="modalskillchart" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Skill Chart</h4>
+            </div>
+            <br>
+            <div class='graph-filter row'>
+              <div class="col-xs-4">
+                <select class="form-control" id="skill-year">
+                  <option value="basedon" readonly disabled>Year</option>
+                  {% for i in year_list %}
+                  <option value="{{i}}">{{i}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-xs-4">
+                <select class="form-control month" id="skill-month">
+                  <option value="month" readonly disabled>Month</option>
+                  <option value="1">Jan</option>
+                  <option value="2">Feb</option>
+                  <option value="3">Mar</option>
+                  <option value="4">Apr</option>
+                  <option value="5">May</option>
+                  <option value="6">Jun</option>
+                  <option value="7">Jul</option>
+                  <option value="8">Aug</option>
+                  <option value="9">Sep</option>
+                  <option value="10">Oct</option>
+                  <option value="11">Nov</option>
+                  <option value="12">Dec</option>
+                  <option value="all">All</option>
+                </select>
+              </div>
+              <div class="col-xs-4">
+                <select class="form-control week" id="skill-week">
+                  <option value="week" readonly disabled>Week</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-body" id="modal-skillchart-graph">
+              <canvas id='skillchart'></canvas>
+            </div>
+            <div class="modal-footer">
+              <h3></h3>
+              <table class="table table-striped graph-table" id='skill-graph-table'>
+              <thead>
+                <tr>
+                  <th class="graph-header-sno">Sno.</th>
+                  <th class="graph-header-head">Skill</th>
+                  <th class="graph-header-value">Billable Hours</th>
+                  <th class="graph-header-value">Non-Billable Hours</th>
+                </tr>
+              </thead>
+            </table>
+            </div> 
+          </div> <!-- modal content -->
+        </div> <!-- modal dialog -->
+      </div> <!-- modal -->
+
+
+      <div id="modalrolechart" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Role Chart</h4>
+            </div>
+            <br>
+            <div class='graph-filter row'>
+              <div class="col-xs-4">
+                <select class="form-control" id="role-year">
+                  <option value="basedon" readonly disabled>Year</option>
+                  {% for i in year_list %}
+                  <option value="{{i}}">{{i}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-xs-4">
+                <select class="form-control month" id="role-month">
+                  <option value="month" readonly disabled>Month</option>
+                  <option value="1">Jan</option>
+                  <option value="2">Feb</option>
+                  <option value="3">Mar</option>
+                  <option value="4">Apr</option>
+                  <option value="5">May</option>
+                  <option value="6">Jun</option>
+                  <option value="7">Jul</option>
+                  <option value="8">Aug</option>
+                  <option value="9">Sep</option>
+                  <option value="10">Oct</option>
+                  <option value="11">Nov</option>
+                  <option value="12">Dec</option>
+                  <option value="all">All</option>
+                </select>
+              </div>
+              <div class="col-xs-4">
+                <select class="form-control week" id="role-week">
+                  <option value="week" readonly disabled>Week</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-body" id="modal-rolechart-graph">
+              <canvas id='rolechart'></canvas>
+            </div>
+            <div class="modal-footer">
+              <h3></h3>
+              <table class="table table-striped graph-table" id='role-graph-table'>
+              <thead>
+                <tr>
+                  <th class="graph-header-sno">Sno.</th>
+                  <th class="graph-header-head">Role</th>
+                  <th class="graph-header-value">Billable Hours</th>
+                  <th class="graph-header-value">Non-Billable Hours</th>
+                </tr>
+              </thead>
+            </table>
+            </div> 
+          </div> <!-- modal content -->
+        </div> <!-- modal dialog -->
+      </div> <!-- modal -->
+
+      <div id="modalbillablechart" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Billable and Non-Billable hours</h4>
+            </div>
+            <br>
+            <div class='graph-filter row'>
+              <div class="col-xs-3 col-xs-offset-6">
+                <select class="form-control" id="billable-year">
+                  <option value="basedon" readonly disabled>Year</option>
+                  {% for i in year_list %}
+                  <option value="{{i}}">{{i}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-xs-3">
+                <select class="form-control" id="billable-user">
+                  <option value="user" readonly disabled>User</option>
+                  {% for l in userlist %}
+                  <option value="{{ l }}">{{ l }}</option>
+                  {% endfor %}
+                  <option value="All" selected>All</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-body" id="modal-billablechart-graph">
+              <canvas id='billablechart'></canvas>
+            </div>
+            <div class="modal-footer">
+              <h3></h3>
+              <table class="table table-striped graph-table" id='billable-graph-table'>
+              <thead>
+                <tr>
+                  <th class="graph-header-sno">Sno.</th>
+                  <th class="graph-header-head">Month</th>
+                  <th class="graph-header-value">Billable Hours</th>
+                  <th class="graph-header-value">Non-Billable Hours</th>
+                </tr>
+              </thead>
+            </table>
+            </div> 
+          </div> <!-- modal content -->
+        </div> <!-- modal dialog -->
+      </div> <!-- modal -->
+
+        <div id="modalclientchart" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Employee Count</h4>
+              <p> All Accounts</p>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-xs-4 client-emp-count-head">
+                  Total Count 
+                  <p class="client-emp-count" id="total-emp">500</p>
+                </div>
+                <div class="col-xs-4 client-emp-count-head">
+                  Client Count
+                  <p class="client-emp-count" id="client-emp">420</p>
+                </div>
+                <div class="col-xs-4 client-emp-count-head">
+                  Support group Count
+                  <p class="client-emp-count" id="support-emp">80</p>
+                </div>
+              </div>
+            </div>
+            <div class="modal-body" id="modal-clientchart-graph">
+              <h4 class="modal-header">
+                Clients By Emp Count
+              </h4>
+              <canvas id='clientchart'></canvas>
+            </div>
+            <div class="modal-footer">
+              <div class="modal-body" id="modal-supportchart-graph">
+              <h4 class="modal-header">
+                Support group By Emp Count
+              </h4>
+              <canvas id='supportgroupchart'></canvas>
+            </div>
+            </div> 
+          </div> <!-- modal content -->
+        </div> <!-- modal dialog -->
+      </div> <!-- modal -->
+
+
+      </div> <!-- /container -->
+    </div>
+  </div> <!-- /wrapper -->
+
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+    <script src="{% static 'js/Chart.js' %}"></script>
+    <script src="{% static 'js/graph.js' %}"></script>
+  </body>
+</html>

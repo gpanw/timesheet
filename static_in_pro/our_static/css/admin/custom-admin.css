@@ -1,0 +1,52 @@
+.login #container {
+	background: black;
+}
+
+#header{ 
+	background-color: #555756; 
+	border-bottom: solid 2px #5cb85c; }
+
+
+#id_username, #id_password {
+	border-color: #5cb85c;
+}
+
+:focus{
+	border-color: #5cb85c;	
+	outline-color: #5cb85c;
+	outline-width: 5px;
+}
+
+.login>#container>#content>#content-main>form>.submit-row>input{
+	background-color: #5cb85c;
+	background: #5cb85c;
+}
+
+.login>#container>#content>#content-main>form>.submit-row>input[type="submit"]:hover, 
+.login>#container>#content>#content-main>form>.submit-row>input[type="submit"]:active, 
+.login>#container>#content>#content-main>form>.submit-row>input[type="submit"]:focus {
+	background-color: #5cb85c;
+	background: #5cb85c;
+}
+
+div .app-auth, div .app-leave, div .app-priortime, div .app-current, div .app-userprofile, #changelist-filter, .results, #changelist #toolbar{
+	box-shadow: 2px 2px 10px #888888;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.module caption{
+	background: #555756;
+	border-bottom: solid 2px #5cb85c;
+}
+
+#changelist-filter h2{
+	border-bottom: solid 2px #5cb85c;
+	background: #555756;
+}
+
+div.breadcrumbs{
+	background: #555756;
+	color: #5cb85c;
+	border-bottom: solid 2px #5cb85c;
+}

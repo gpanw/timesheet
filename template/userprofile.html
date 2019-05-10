@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>OTes user profile</title>
+
+    {% include 'head.html' %}
+
+  </head>
+
+  <body>
+
+
+   {% include 'navbar.html' %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron" id = "leave-jumbotron">
+      <div class="container">
+        <h2>User Page - {{ current_user }} </h2>
+        <hr>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+          <div class = "col-md-4">
+             <h3>User Info</h3>
+             <table class="table table-striped" id='user-profile'>
+			     <tbody id="user-table">
+			         <tr>
+			            <td class="last-name"><b>Last Name</b></td>
+			            <td>{{ lastname }}</td>
+			         </tr>
+			         <tr>
+			            <td class="first-name"><b>First Name</b></td>
+			            <td>{{ firstname }}</td>
+			         </tr>
+			         <tr>
+			            <td class="emailid"><b>Email</b></td>
+			            <td>{{ email }}</td>
+			         </tr>
+			         <tr>
+			            <td class="Mobile"><b>Mobile</b></td>
+			            <td>{{ mobile }}</td>
+			         </tr>
+			         <tr>
+			            <td class="role"><b>Role</b></td>
+			            <td>{{ role }}</td>
+			         </tr>
+			         <tr>
+			            <td class="skill"><b>Skill</b></td>
+			            <td>{{ skill }}</td>
+			         </tr>
+			         <tr>
+			            <td class="manager"><b>Manager</b></td>
+			            <td>{{ manager_id }}</td>
+			         </tr>
+			         <tr>
+			            <td class="Projects"><b>Projects</b></td>
+			            <td>{{ project }}</td>
+			         </tr>
+			         <tr>
+			            <td class="Location"><b>Location</b></td>
+			            <td>{{ location }}</td>
+			         </tr>
+			         <tr>
+			            <td class="joined"><b>Joined On</b></td>
+			            <td>{{ joined }}</td>
+			         </tr>
+			      </tbody>
+            </table>
+            </div>
+
+            <div class = "col-md-6 pull-right">
+
+             <h3>Leave Balance</h3>
+             <table class="table table-striped" id='leave-profile'>
+			     <tbody id="leave-table">
+                      <tr>
+                 		 <th></th>
+		                 <th>CL (in hours)</th>
+		                 <th>EL (in hours)</th>
+	                 </tr>
+			         <tr>
+			            <td>Leave Balance</td>
+			            <td class="balance-casual">{{ casual }}</td>
+			            <td class="balance-earned">{{ earned }}</td>
+			         </tr>
+			      </tbody>
+            </table>
+
+          </div>
+      </div>
+
+      <hr>
+
+    </div> <!-- /container -->
+
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script>$("#nav-user").addClass("active");</script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+    <!--  <script src="{% static 'js/leave.js' %}"></script> -->
+  </body>
+</html>

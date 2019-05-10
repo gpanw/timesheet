@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <li class="sidebar-list">
+          <div class="sidebar-list-div"><h3>
+            <span><a href="/reports/" class="list-link">Dashboard</a></span></h3>
+          </div>
+        </li>
+        <li class="sidebar-list">
+          <div class="reports has-child sidebar-list-div">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+            <span><a class="list-link">Reports</a></span>
+            <span id="reports-glyph" class="glyphicon glyphicon-chevron-right glyph-custom" aria-hidden="true"></span>
+          </div>
+          <ul id="reports-list" class="child-list">
+            <li><a href="{% url 'pretimesheets' slug %}">Previous Timesheets</a></li>
+            <li><a href="{% url 'useradmin' slug %}">Team Information</a></li>
+          </ul>
+        </li>
+        <li class="sidebar-list">
+          <div class="approval has-child sidebar-list-div">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <span><a class="list-link">Approvals Pending</a></span>
+            <span id="approval-glyph" class="glyphicon glyphicon-chevron-right glyph-custom" aria-hidden="true"></span>
+          </div>
+          <ul id="approval-list" class="child-list">
+            <li><a href="{% url 'approvetimesheet' slug %}">Timesheet</a></li>
+            <li><a href="{% url 'approveprior' slug %}">Prior Timesheets</a></li>
+          </ul>
+        </li>
+        <li class="sidebar-list">
+          <div class="graphs sidebar-list-div">
+            <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+            <span><a href="{% url 'graphs' slug %}">Graphs</a></span>
+          </div>
+        </li>
+      </ul>
+    </div>

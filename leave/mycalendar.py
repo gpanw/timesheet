@@ -33,7 +33,7 @@ class leaveCalendar(HTMLCalendar):
         self.year, self.month = year, month
         return super(leaveCalendar, self).formatmonth(year, month)
 
-    def get_leave_info(self,LeaveEvents):
+    def get_leave_info(self, LeaveEvents):
         leavedata = []
         for val in LeaveEvents:
             data =[]
@@ -41,11 +41,11 @@ class leaveCalendar(HTMLCalendar):
             data.append(val.user)
             data.append(val.leaveid)
             data.append(val.comment)
-            leavedata.append([myday,data])
+            leavedata.append([myday, data])
         key = lambda leavedata:leavedata[0]
         leavedata.sort(key=key)
         return dict(
-            [(k, list(group)) for k, group in groupby(leavedata,key)]
+            [(k, list(group)) for k, group in groupby(leavedata, key)]
             )
         
 

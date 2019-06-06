@@ -23,7 +23,7 @@ def leavetrack(request, yyyy='', mm=''):
     else:
         now = timezone.now()
         d = yyyy + ' ' + mm + ' ' + '01'
-        now = datetime.strptime(d,"%Y %m %d")
+        now = datetime.strptime(d, "%Y %m %d")
     parms = getCalendar(request, now.year, now.month)
     u = userprofile.objects.get(user_id__username=user.username)
     parms['is_manager'] = user.is_staff

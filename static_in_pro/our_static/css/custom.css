@@ -36,6 +36,7 @@ ul {
 .navbar-inverse, .navbar-brand{
 	font-size: 20px;
 	color: white;
+	font-weight: bold;
 }
 
 .navbar-toggle {
@@ -838,3 +839,4 @@ input::-webkit-inner-spin-button {
 	font-size: 20px;
 	background: #b0dde273;
 }
+

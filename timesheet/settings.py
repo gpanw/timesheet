@@ -62,7 +62,7 @@ ROOT_URLCONF = 'timesheet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR),"template"],
+        'DIRS': [os.path.join(BASE_DIR), "template"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,7 +129,7 @@ USE_TZ = True
 
 #STATIC_URL = '/static/'
 STATIC_URL = '/static/our_static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "live-static","static-root")
+STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static_in_pro","our_static"),
@@ -146,4 +146,4 @@ EMAIL_USE_TLS = True
 #STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "live-static","media-root")
+MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")

@@ -51,5 +51,6 @@ class userprofile(models.Model):
     manager_id = models.CharField(max_length=20, null=True, blank=True)
     user_location = models.CharField(max_length=30, choices=Countries.countries_list,
                                      default=Countries.countries_list[0][0])
+    profile_photo = models.ImageField(upload_to='img/profilepics', default='/profile/pics/images.png')
     objects = UserprofileManager()
 

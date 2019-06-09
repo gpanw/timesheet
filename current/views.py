@@ -61,7 +61,7 @@ def current(request):
                     task_data.append(json_data)
                 return JsonResponse(task_data, safe=False)
 
-    parms = {'current_user':user}
+    parms = {'current_user': user}
     parms['leave_tasks'] = leave.objects.all()
     task_list = []
     u = userprofile.objects.get(user_id__username=user.username)

@@ -132,7 +132,7 @@ STATIC_URL = '/static/our_static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static_in_pro","our_static"),
+    os.path.join(BASE_DIR, "static_in_pro", "our_static"),
     #os.path.join(BASE_DIR, "static_in_env"),
     #'/var/www/static/',
 )

@@ -27,13 +27,19 @@
             {% endif %}
             <li class="dropdown nav-element" id="nav-user">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ current_user }}<span class="caret"></span></a>
-              <ul class="dropdown-menu" style="width: 250px;">
-                <li class="profile-dropdown" style="padding:5px;">
-                     <footer class="panel-footer">
-                        <div><a href="/profile" id="profile" role="button">Profile</a>
-                        <a href="/logout" class="pull-right" role="button">Logout</a>
-                        </div>
-                     </footer>
+              <ul class="dropdown-menu">
+                <li class="profile-dropdown">
+                  <a class="avatar-a">
+                    <img height="48" width="48" class="avatar">
+                    <span><p class="avatar-name">{{ current_user.first_name }} {{ current_user.last_name }}</p>
+                    <p class="avatar-name">{{ current_user.email }}</p></span>
+                  </a>
+                </li>
+                <li class="profile-dropdown panel-footer">
+                  <div>
+                    <a href="/profile" id="profile" role="button">My Profile</a>
+                    <a href="/logout" class="pull-right" role="button">Logout</a>
+                  </div>
                 </li>
               </ul> 
             </li>

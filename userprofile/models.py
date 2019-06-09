@@ -54,3 +54,15 @@ class userprofile(models.Model):
     profile_photo = models.ImageField(upload_to='profilepics/', default='/profilepics/images.png')
     objects = UserprofileManager()
 
+    def save(self, *args, **kwargs):
+        try:
+            this = userprofile.objects.get(id=self.id)
+            if this.profile_photo.name == '/profilepics/images.png':
+                pass
+            else:
+                this.profile_photo.delete(save=False)
+        except:
+            pass
+        super(userprofile, self).save(*args, **kwargs)
+
+

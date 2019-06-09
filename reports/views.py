@@ -184,7 +184,7 @@ def approveprior(request, team_id=None):
     u = userprofile.objects.values_list('user_id__username', flat=True).filter(**kwargs).distinct()
     if u:
         userlist = priorsheet.objects.values_list('user', flat=True).filter(user__in=u).\
-            oerder_by('user').distinct()
+            order_by('user').distinct()
     else:
         userlist = []
     parms['userlist'] = userlist

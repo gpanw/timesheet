@@ -26,12 +26,18 @@
             <li class ="nav-element class-nav-reports" id="id-nav-reports"><a href="/admin">Go To Admin Site</a></li>
             {% endif %}
             <li class="dropdown nav-element" id="nav-user">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ current_user }}<span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span>
+                  <img  src="{{ current_user.userprofile.profile_photo.url }}" height="32" width="32" class="img-circle avatar">
+                </span>
+                <!--<span>{{ current_user }}</span> -->
+                <span class="caret"></span>
+              </a>
               <ul class="dropdown-menu">
                 <li class="profile-dropdown">
                   <a class="avatar-a">
-                    <img height="48" width="48" class="avatar">
-                    <span><p class="avatar-name">{{ current_user.first_name }} {{ current_user.last_name }}</p>
+                    <img height="48" width="48" class="img-circle avatar" src="{{ current_user.userprofile.profile_photo.url }}">
+                    <span><p class="avatar-name">{{ current_user }}</p>
                     <p class="avatar-name">{{ current_user.email }}</p></span>
                   </a>
                 </li>

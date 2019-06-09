@@ -144,7 +144,7 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = userprofile
         fields = ['user_id', 'user_role', 'user_skill', 'project', 'manager_id', 'user_mobile',
-                  'user_location', 'earned_leave', 'casual_leave']
+                  'user_location', 'earned_leave', 'casual_leave', 'profile_photo']
 
 
 class UserProfileAdmin(admin.ModelAdmin):

@@ -24,13 +24,13 @@ class applyleaveForm(forms.Form):
         self.fields['users'] = forms.ChoiceField(choices=tuple(u), initial=self.user)
 
     leaves = [(0, 'Select Value')]
-    #try:
-    #    leaveobj = leave.objects.all().order_by('leave_id')
-    #except:
-    #    pass
-    #else:
-    #    for x in leaveobj:
-    #        leaves.append((x.leave_id, x.leave_id + ' - ' + x.leave_description))
+    try:
+        leaveobj = leave.objects.all().order_by('leave_id')
+    except:
+        pass
+    else:
+        for x in leaveobj:
+            leaves.append((x.leave_id, x.leave_id + ' - ' + x.leave_description))
         
     leaveid = forms.ChoiceField(choices=tuple(leaves))
     date = forms.CharField(initial='select Date from Calendar')
@@ -38,4 +38,3 @@ class applyleaveForm(forms.Form):
     repeat = forms.IntegerField(min_value=0, initial=0, required=False)
     comment = forms.CharField(max_length=20, required=False)
 
-                               

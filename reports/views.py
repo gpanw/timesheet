@@ -316,8 +316,6 @@ def useradmin(request, team_id=None):
                     pass
                 else:
                     role_list = role.objects.values_list('role', flat=True)
-                    print(u.user_role)
-                    print(role_list)
                     res = dict()
                     res['lastname'] = u.user_id.last_name
                     res['firstname'] = u.user_id.first_name

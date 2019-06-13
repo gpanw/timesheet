@@ -315,7 +315,6 @@ def useradmin(request, team_id=None):
                 except ObjectDoesNotExist:
                     pass
                 else:
-                    role_list = role.objects.values_list('role', flat=True)
                     res = dict()
                     res['lastname'] = u.user_id.last_name
                     res['firstname'] = u.user_id.first_name

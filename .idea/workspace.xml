@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d657f3e4-419f-4fcd-aafd-6df31ea76786" name="Default Changelist" comment="" />
+    <list default="true" id="d657f3e4-419f-4fcd-aafd-6df31ea76786" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/template/registration/password_reset_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/registration/password_reset_email.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

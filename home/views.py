@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse
+from login.forms import WriteToUsForm
 
 
 def home(request):
@@ -19,7 +19,11 @@ def home(request):
         else:
             error = "Invalid userid or password!"
             userid = username
-    return render(request, 'template/login.html', {'error': error, 'userid': username})
+    parms = dict()
+    parms['error'] = error
+    parms['username'] = username
+    parms['writeform'] = WriteToUsForm()
+    return render(request, 'template/login.html', parms)
 
 
 def contactus(request):

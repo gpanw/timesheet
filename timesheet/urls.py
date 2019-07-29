@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from home import views
+from login import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home, name='home'),
+    url(r'^$', views.loginpage, name='home'),
     url(r'^contact', views.contactus, name='contactus'),
     url(r'^', include('login.urls')),
     url(r'^', include('current.urls')),

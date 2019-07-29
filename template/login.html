@@ -108,10 +108,23 @@
         <span class="message-header-text">Write To Us</span>
         <span id="reports-glyph" class="glyphicon glyphicon-chevron-up message-glyph" aria-hidden="true"></span>
       </div>
-      <div class="message-body">
+      <form class="form-signin form-write-to-us" method="post">
+        {% csrf_token %}
+        <div class="message-body message-form">
+          {{ writeform }}
+          <br>
+          <div class="form-submit">
+            <button class="btn btn-xs btn-danger btn-block send-mail-btn" type="submit" name="writetous">Send</button>
+          </div>
+        </div>
+      <!-- 
         <div class="form-group message-form">
           <label for="from">Your Email:</label>
           <input type="text" class="form-control" id="from">
+        </div>
+        <div class="form-group message-form">
+          <label for="subject">Subject:</label>
+          <input type="text" class="form-control" id="subject">
         </div>
         <div class="form-group message-form">
           <label for="conetnt">Message:</label>
@@ -120,7 +133,8 @@
         <div class="form-submit">
           <button class="btn btn-xs btn-danger btn-block send-mail-btn" type="submit">Send</button>
         </div>
-      </div>
+      </div> -->
+      </form>
     </div>
 
 

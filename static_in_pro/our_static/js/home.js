@@ -1,12 +1,5 @@
 model ={
     hostURL: "/",
-    getLeave: function(Ldate){
-	       parms = {"from": "getleave"};
-	       parms["Ldate"] = Ldate;
-               $.getJSON(model.hostURL,parms).done(function(response){
-                 control.handlegetLeave(response);
-               }); 
-         },
          
 	  getCookie: function(name){
 	    	   var cookieValue = null;

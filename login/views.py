@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import WriteToUsForm
+from django.core.mail import send_mail
 
 
 def loginpage(request):
@@ -10,7 +11,10 @@ def loginpage(request):
         if 'writetous' in request.POST:
             form = WriteToUsForm(request.POST)
             if form.is_valid():
-                print('g1111111', request.POST)
+                from_email = form.cleaned_data['email_id']
+                subject = form.cleaned_data['subject']
+                message = form.cleaned_data['message']
+                send_mail(subject, message, from_email, ['gorav.panwar@gmail.com'])
         else:
             username = request.POST["userid"]
             password = request.POST["password"]

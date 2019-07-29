@@ -7,7 +7,7 @@ from .models import timesheet
 from project.models import task, leave, teams
 from userprofile.models import userprofile
 from django.contrib.auth.models import User, Group
-import json, re
+import json
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist

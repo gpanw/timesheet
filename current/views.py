@@ -27,8 +27,8 @@ def current(request):
                 i = 0
                 leave_list = [x.leave_id for x in leave.objects.all()]
                 for t in task_json:
-                    hr = json.dumps(hours_list[7*i:7+7*i])
-                    i = i+1
+                    hr = json.dumps(hours_list[7 * i:7 + 7 * i])
+                    i = i + 1
                     vc = validate_values(t, select_date, hr, user, leave_list)
                     if vc == "success":
                         pass
@@ -36,9 +36,9 @@ def current(request):
                         return JsonResponse({'rc': vc}, safe=False)
                 i = 0
                 for t in task_json:
-                    hours = json.dumps(hours_list[7*i:7+7*i])
-                    i = i+1
-                    rc = add_timesheet(t, select_date, hours, user, leave_list)
+                    hours = json.dumps(hours_list[7 * i:7 + 7 * i])
+                    i = i + 1
+                    rc = add_timesheet(t, select_date, hours, user)
                 return JsonResponse({'rc': rc}, safe=False)
 
         if request.GET:
@@ -80,7 +80,7 @@ def is_ajax():
 def fetch_task(task_filter=None):
     kwargs = dict()
     args = ()
-    kwargs['task_group']=task_filter
+    kwargs['task_group'] = task_filter
     try:
         taskData = task.objects.filter(*args, **kwargs)
     except:
@@ -119,67 +119,29 @@ def fetch_timesheet(taskid, date, user):
         return timesheetdata
 
 
-def update_timesheet(t, date, hours, user, leave_list=[]):
-    kwargs = dict()
-    args = ()
+def add_timesheet(t, date, hours, user):
     task_name = t['taskid']
     is_billable = t['billable']
-    kwargs['taskid'] = task_name
-    kwargs['date'] = date
-    kwargs['user'] = user.username
-    kwargs['is_billable'] = is_billable
     try:
-        updaterow = timesheet.objects.get(*args, **kwargs)
+        obj = timesheet.objects.get(taskid=task_name,
+                                    date=date,
+                                    is_billable=is_billable,
+                                    user=user.username)
     except ObjectDoesNotExist:
+        obj = timesheet(taskid=task_name,
+                        date=date,
+                        hours=hours,
+                        user=user,
+                        is_billable=is_billable)
+    else:
+        obj.hours = hours
+
+    try:
+        obj.save()
+    except Exception as e:
         return 0
     else:
-        if task_name.split(' - ')[0] in leave_list:
-            previous_hours = updaterow.hours
-            jsonDec = json.decoder.JSONDecoder()
-            hr = jsonDec.decode(previous_hours)
-            totalPre = sum([float(i) for i in hr])
-            jsonDec = json.decoder.JSONDecoder()
-            hr = jsonDec.decode(hours)
-            totalCurr = sum([float(i) for i in hr])
-            adjusted = totalCurr - totalPre
-            update_userleave(user, task_name.split(' - ')[0], adjusted)
-        updaterow.hours = hours
-        updaterow.save()
         return 1
-
-
-def add_timesheet(t, date, hours, user, leave_list=[]):
-    update_return = update_timesheet(t, date, hours, user, leave_list)
-    task_name = t['taskid']
-    is_billable = t['billable']
-    if update_return:
-        return update_return
-    else:
-        addTimesheet = timesheet(taskid=task_name,
-                                 date=date,
-                                 hours=hours,
-                                 user=user,
-                                 is_billable=is_billable)
-        try:
-            addTimesheet.save()
-        except Exception as e:
-            return 0
-        else:
-            if task_name.split(' - ')[0] in leave_list:
-                jsonDec = json.decoder.JSONDecoder()
-                hr = jsonDec.decode(hours)
-                totalCurr = sum([float(i) for i in hr])
-                update_userleave(user, task_name.split(' - ')[0], totalCurr)
-            return 1
-
-
-def update_userleave(user, t, hour):
-    u = userprofile.objects.get(user_id=user)
-    if t == 'EL':
-        u.earned_leave = str(float(u.earned_leave) - hour)
-    if t == 'CL':
-        u.casual_leave = str(float(u.casual_leave) - hour)
-    u.save()
 
 
 def validate_values(t, date, hours, user, leave_list):
@@ -196,24 +158,25 @@ def validate_values(t, date, hours, user, leave_list):
             if sum([float(x) for x in hr]) > u.casual_leave:
                 return "casual leaves exceeded the limit"
         return "success"
-    try:
-        get_task_id = task.objects.get(task_name=task_name,
-                                       is_billable=is_billable)
-    except ObjectDoesNotExist:
-        return 'task ' + task_name + ' is not correct!!!'
-  
+    else:
+        try:
+            get_task_id = task.objects.get(task_name=task_name,
+                                           is_billable=is_billable)
+        except ObjectDoesNotExist:
+            return 'task ' + task_name + ' is not correct!!!'
+
     for h in hr:
         try:
             float(h)
         except:
             return "non integer hours"
-        
+
     if date >= get_friday(timezone.now()).date():
         pass
     else:
         return "Previous week!!Do a Prior Time adjustment"
     return "success"
-        
+
 
 def get_friday(date):
     day = date.weekday()
@@ -223,6 +186,6 @@ def get_friday(date):
     else:
         fridate = date + timedelta(n) + timedelta(7)
     return fridate
-    
-    
+
+
 

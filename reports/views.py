@@ -846,7 +846,7 @@ def approve_prior(forUser, forDate, user):
             is_billable = val.is_billable
             selectDate = val.date
             hours = val.hours
-            rc = add_timesheet(taskid, selectDate, hours, forUser, user, is_billable, leave_list)
+            rc = add_timesheet(taskid, selectDate, hours, forUser, user, is_billable)
             if not rc:
                 break
         if rc:
@@ -868,12 +868,7 @@ def add_timesheet(taskid, selectDate, hours, forUser, user, is_billable, leave_l
     except Exception as e:
         return 0
     else:
-        if taskid.split(' - ')[0] in leave_list:
-            jsonDec = json.decoder.JSONDecoder()
-            hr = jsonDec.decode(hours)
-            totalCurr = sum([float(i) for i in hr])
-            update_userleave(user, taskid.split(' - ')[0], totalCurr)
-    return 1
+        return 1
 
 
 def delete_timesheet(forUser, forDate):

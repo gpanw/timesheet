@@ -168,7 +168,7 @@ def validate_values(t, date, hours, user, leave_list):
     for h in hr:
         try:
             float(h)
-        except:
+        except ValueError:
             return "non integer hours"
 
     if date >= get_friday(timezone.now()).date():

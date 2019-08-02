@@ -830,15 +830,6 @@ def approve_prior(forUser, forDate, user):
         except ObjectDoesNotExist:
             pass
         else:
-            for val in sheetdata:
-                taskid = val.taskid
-                hours = val.hours
-                t = taskid.split('-')[0].replace(' ', '')
-                if t in leave_list:
-                    jsonDec = json.decoder.JSONDecoder()
-                    hr = jsonDec.decode(hours)
-                    totalCurr = sum([float(i) for i in hr])
-                    update_userleave(forUser, t, totalCurr * -1)
             sheetdata.delete()
 
         for val in priorsheetdata:
@@ -856,7 +847,7 @@ def approve_prior(forUser, forDate, user):
         return 1
 
 
-def add_timesheet(taskid, selectDate, hours, forUser, user, is_billable, leave_list=None):
+def add_timesheet(taskid, selectDate, hours, forUser, user, is_billable):
     addTimesheet = timesheet(taskid=taskid,
                              date=selectDate,
                              hours=hours,
@@ -883,25 +874,8 @@ def delete_timesheet(forUser, forDate):
     except Exception as e:
         return "Server Error"
     else:
-        for val in sheetdata:
-            taskid = val.taskid
-            hours = val.hours
-            t = taskid.split('-')[0].replace(' ', '')
-            if t in leave_list:
-                hr = jsonDec.decode(hours)
-                totalCurr = sum([float(i) for i in hr])
-                update_userleave(forUser, t, totalCurr * -1)
         sheetdata.delete()
         return 1
-
-
-def update_userleave(user, t, hour):
-    u = userprofile.objects.get(user_id__username=user)
-    if t == 'EL':
-        u.earned_leave = str(float(u.earned_leave) - hour)
-    if t == 'CL':
-        u.casual_leave = str(float(u.casual_leave) - hour)
-    u.save()
 
 
 def validate_userinfo(*args, **kwargs):

@@ -6,7 +6,6 @@ from userprofile.models import userprofile
 
 @receiver(post_save, sender=timesheet)
 def handling_leaves_on_new_time_entry(sender, instance, created, **kwargs):
-    print('g22222', instance.taskid, instance.hours)
     if created:
         adjusted = instance.sum_hours
     else:
@@ -23,7 +22,6 @@ def handling_leaves_on_new_time_entry(sender, instance, created, **kwargs):
 
 @receiver(post_delete, sender=timesheet)
 def handling_leaves_on_delete_time_entry(sender, instance, using, **kwargs):
-    print('g11111', instance.taskid, instance.hours)
     t = instance.taskid.split(' - ')
     u = userprofile.objects.get(user_id__username=instance.user)
     if t[0] == 'EL':

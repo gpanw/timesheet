@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d657f3e4-419f-4fcd-aafd-6df31ea76786" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/current/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/current/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/current/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/current/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/live-static/media-root/profilepics/test1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/timesheet/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/timesheet/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,7 +13,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/current/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
@@ -22,6 +21,27 @@
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/userprofile/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="389">
+              <caret line="56" column="36" lean-forward="true" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/timesheet/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="627">
+              <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -38,7 +58,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/current/signals.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="68">
               <caret line="7" column="75" selection-start-line="7" selection-start-column="75" selection-end-line="7" selection-end-column="75" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
@@ -95,7 +115,6 @@
         <option value="$PROJECT_DIR$/project/signals.py" />
         <option value="$PROJECT_DIR$/project/models.py" />
         <option value="$PROJECT_DIR$/leave/mycalendar.py" />
-        <option value="$PROJECT_DIR$/timesheet/settings.py" />
         <option value="$PROJECT_DIR$/current/admin.py" />
         <option value="$PROJECT_DIR$/userprofile/forms.py" />
         <option value="$PROJECT_DIR$/userprofile/views.py" />
@@ -112,6 +131,7 @@
         <option value="$PROJECT_DIR$/current/signals.py" />
         <option value="$PROJECT_DIR$/current/views.py" />
         <option value="$PROJECT_DIR$/current/models.py" />
+        <option value="$PROJECT_DIR$/timesheet/settings.py" />
       </list>
     </option>
   </component>
@@ -137,12 +157,7 @@
             <path>
               <item name="src" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="current" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="reports" type="462c0819:PsiDirectoryNode" />
+              <item name="timesheet" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -291,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564735990264</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="08142019">
+      <created>1565752346945</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1565752346945</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -325,7 +347,8 @@
     <MESSAGE value="07292019" />
     <MESSAGE value="08012019" />
     <MESSAGE value="08022019" />
-    <option name="LAST_COMMIT_MESSAGE" value="08022019" />
+    <MESSAGE value="08142019" />
+    <option name="LAST_COMMIT_MESSAGE" value="08142019" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/project/admin.py">
@@ -390,22 +413,6 @@
           <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/timesheet/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userprofile/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -527,22 +534,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/current/apps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/leave/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reports/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
@@ -563,9 +554,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/current/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/current/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/current/signals.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="68">
           <caret line="7" column="75" selection-start-line="7" selection-start-column="75" selection-end-line="7" selection-end-column="75" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
@@ -580,13 +588,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/current/models.py">
+    <entry file="file://$PROJECT_DIR$/leave/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+        <state>
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/userprofile/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="56" column="36" lean-forward="true" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/timesheet/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
         </state>
       </provider>
     </entry>

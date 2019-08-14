@@ -3,7 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import datetime, timedelta
 from .models import timesheet
-from project.models import task, teams
+from project.models import (task,
+                            leave,
+                            teams)
 from userprofile.models import userprofile
 import json
 from django.http import JsonResponse
@@ -98,7 +100,7 @@ def fetch_timesheet(taskid, date, user):
     if date:
         kwargs['date'] = date
     try:
-        sheetdata = timesheet.objects.filter(*args, **kwargs).order_by('tstamp')
+        sheetdata = timesheet.objects.filter(*args, **kwargs)
     except ObjectDoesNotExist:
         return 0
     else:

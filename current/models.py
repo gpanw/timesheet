@@ -15,6 +15,9 @@ class timesheet(models.Model):
     tstamp = models.DateTimeField(auto_now_add=True, null=True)
     is_billable = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ["-tstamp",]
+
     def __init__(self, *args, **kwargs):
         super(timesheet, self).__init__(*args, **kwargs)
         self.current_sum_hours = self.sum_hours

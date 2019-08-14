@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d657f3e4-419f-4fcd-aafd-6df31ea76786" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/current/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/current/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/current/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/current/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/current/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/current/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/current/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="306">
+              <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -50,11 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/current/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="63" column="46" selection-start-line="63" selection-start-column="46" selection-end-line="63" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#45#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="119">
+              <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -111,10 +108,10 @@
         <option value="$PROJECT_DIR$/login/views.py" />
         <option value="$PROJECT_DIR$/current/apps.py" />
         <option value="$PROJECT_DIR$/priortime/views.py" />
-        <option value="$PROJECT_DIR$/current/models.py" />
         <option value="$PROJECT_DIR$/reports/views.py" />
         <option value="$PROJECT_DIR$/current/signals.py" />
         <option value="$PROJECT_DIR$/current/views.py" />
+        <option value="$PROJECT_DIR$/current/models.py" />
       </list>
     </option>
   </component>
@@ -280,7 +277,21 @@
       <option name="project" value="LOCAL" />
       <updated>1564725664861</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="08022019">
+      <created>1564735240629</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1564735240629</updated>
+    </task>
+    <task id="LOCAL-00016" summary="08022019">
+      <created>1564735990264</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1564735990264</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -564,18 +575,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/current/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="63" column="46" selection-start-line="63" selection-start-column="46" selection-end-line="63" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="119">
+          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/current/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="306">
+          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>

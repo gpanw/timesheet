@@ -12,7 +12,8 @@ model ={
 	  	      $(document.body).css({'cursor' : 'wait'});
 	  		  parms = {"from": "getTaskOtherTeam"};
 	  		  parms["teamname"] = teamVal;
-	  		  $.getJSON(model.hostURL,parms).done(function(response){
+	  		  var apiURL = "/api/tasks/" + teamVal;
+	  		  $.getJSON(apiURL,parms).done(function(response){
                  control.handle_getTaskOtherTeam(response);
                }); 
 	  },  
@@ -376,7 +377,7 @@ viewTimesheet = {
 	  	$('#other-task').children().remove();
 	  	$('#other-task').append("<option value='0'>Select tasks</option>");
 	  	for(i=0;i<response.length;i++) {
-	  		appendText = "<option value=" + i + "><span class='other-taskname'>" + response[i].taskname + "</span>"
+	  		appendText = "<option value=" + i + "><span class='other-taskname'>" + response[i].task_name + "</span>"
 	  		if (response[i].is_billable) {
 	  			appendText += " | Billable</option>";
 	  		}

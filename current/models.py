@@ -16,7 +16,7 @@ class timesheet(models.Model):
     is_billable = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ["-tstamp",]
+        ordering = ["tstamp",]
 
     def __init__(self, *args, **kwargs):
         super(timesheet, self).__init__(*args, **kwargs)

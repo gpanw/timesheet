@@ -15,51 +15,6 @@ from django.core.exceptions import ObjectDoesNotExist
 @login_required(login_url='/login/')
 def current(request):
     user = request.user
-    if request.is_ajax():
-        if request.POST:
-            if request.POST['from'] == 'addtimesheet':
-                selected_week = request.POST['selectedWeek']
-                s = " ".join(selected_week.split(" ")[1:4])
-                select_date = datetime.strptime(s, "%b %d %Y").date()
-                hours_list = request.POST.getlist('hoursList[]')
-                added_task = request.POST.getlist('addedtask[]')
-                task_json = json.loads(added_task[0])
-                i = 0
-                leave_list = [x.leave_id for x in leave.objects.all()]
-                for t in task_json:
-                    hr = json.dumps(hours_list[7 * i:7 + 7 * i])
-                    i = i + 1
-                    vc = validate_values(t, select_date, hr, user, leave_list)
-                    if vc == "success":
-                        pass
-                    else:
-                        return JsonResponse({'rc': vc}, safe=False)
-                i = 0
-                for t in task_json:
-                    hours = json.dumps(hours_list[7 * i:7 + 7 * i])
-                    i = i + 1
-                    rc = add_timesheet(t, select_date, hours, user)
-                return JsonResponse({'rc': rc}, safe=False)
-
-        if request.GET:
-            if request.GET['from'] == 'getTimeSheet':
-                selected_week = request.GET['selectedWeek']
-                s = " ".join(selected_week.split(" ")[1:4])
-                select_date = datetime.strptime(s, "%b %d %Y").date()
-                current_sheet = fetch_timesheet('', select_date, user)
-                return JsonResponse(current_sheet, safe=False)
-            if request.GET['from'] == 'getTaskOtherTeam':
-                team_name = request.GET['teamname']
-                task_list = task.objects.filter(task_group=team_name,
-                                                task_status='OP')
-                task_data = []
-                for val in task_list:
-                    json_data = {'taskname': val.task_name,
-                                 'is_billable': val.is_billable
-                                 }
-                    task_data.append(json_data)
-                return JsonResponse(task_data, safe=False)
-
     parms = {'current_user': user}
     parms['leave_tasks'] = leave.objects.all()
     u = userprofile.objects.get(user_id__username=user.username)
@@ -69,11 +24,6 @@ def current(request):
     parms['task_list'] = task_list
     parms['teamlist'] = [n.team_name for n in teams.objects.all()]
     return render(request, 'template/timesheet.html', parms)
-
-
-def is_ajax():
-    return META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
-
 
 # functions to fetch tasks from database
 def fetch_task(task_filter=None):

@@ -31,4 +31,6 @@ urlpatterns = [
     url(r'^', include('managerpage.urls')),
     url(r'^', include('reports.urls')),
     url('^', include('django.contrib.auth.urls')),
+    url(r'^api/timesheet/', include("current.api.urls", namespace='timesheet-api')),
+    url(r'^api/tasks/', include("project.api.urls", namespace='task-api')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

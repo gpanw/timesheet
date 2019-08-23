@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from current.models import timesheet
 from project.models import leave, teams, task
 from userprofile.models import userprofile
-from current.views import fetch_task, fetch_timesheet, get_friday
+from current.views import fetch_timesheet
 from .models import priorsheet
 from django.contrib.auth.models import User, Group
 import json, re

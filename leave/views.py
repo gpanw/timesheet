@@ -25,7 +25,6 @@ def leavetrack(request, yyyy='', mm=''):
         d = yyyy + ' ' + mm + ' ' + '01'
         now = datetime.strptime(d, "%Y %m %d")
     parms = getCalendar(request, now.year, now.month)
-    u = userprofile.objects.get(user_id__username=user.username)
     parms['is_manager'] = user.is_staff
     parms['current_user'] = user
     return render(request, 'template/leave.html', parms)
@@ -54,7 +53,7 @@ def manageleave(request, yyyy='', mm=''):
                         else:
                             returnValue.append(returnVal)
                             break
-                return JsonResponse(returnValue,safe=False)
+                return JsonResponse(returnValue, safe=False)
             if request.POST['from'] == 'deleteleave':
                 del_id = request.POST['del_id']
                 return_id = del_applyleave(del_id)
@@ -77,7 +76,6 @@ def manageleave(request, yyyy='', mm=''):
         d = yyyy + ' ' + mm + ' ' + '01'
         now = datetime.strptime(d, "%Y %m %d")
     parms = getCalendar(request, now.year, now.month, False)
-    u = userprofile.objects.get(user_id__username=user.username)
     parms['is_manager'] = user.is_staff
     parms['current_user'] = user
     parms['form'] = applyleaveForm(user)
@@ -165,14 +163,14 @@ def add_applyleave(leaveid, Ldate, Lfor, Lrepeat, Lcomment):
 
 def fetch_applyleave(userlist, Ldate):
     kwargs=dict()
-    kwargs['user__in']=userlist
-    kwargs['date']=Ldate
+    kwargs['user__in'] = userlist
+    kwargs['date'] = Ldate
     try:
         leavelist = applyleave.objects.filter(**kwargs)
     except ObjectDoesNotExist:
         return 0
     else:
-        leavedata =[]
+        leavedata = []
         for val in leavelist:
             Jsondata = {'leaveid': val.leaveid,
                         'leavedate': val.date,
@@ -196,4 +194,3 @@ def del_applyleave(del_id):
             return_id = None
 
     return return_id
-    

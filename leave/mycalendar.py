@@ -4,13 +4,12 @@ from itertools import groupby
 from datetime import date
 from calendar import HTMLCalendar, monthrange
 
+
 class leaveCalendar(HTMLCalendar):
 
     def __init__(self, LeaveEvents):
         super(leaveCalendar, self).__init__()
-        #self.contest_events = self.group_by_day(LeaveEvents)
         self.leave_events = self.get_leave_info(LeaveEvents)
-        #self.contest_events = self.group_by_day([])
 
     def formatday(self, day, weekday):
         if day != 0:
@@ -36,7 +35,7 @@ class leaveCalendar(HTMLCalendar):
     def get_leave_info(self, LeaveEvents):
         leavedata = []
         for val in LeaveEvents:
-            data =[]
+            data = []
             myday = (int(val.date.strftime('%d')))
             data.append(val.user)
             data.append(val.leaveid)

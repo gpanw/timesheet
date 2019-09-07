@@ -16,50 +16,6 @@ from django.core.exceptions import ObjectDoesNotExist
 @login_required(login_url='/login/')
 def priortime(request):
     user = request.user
-    if request.is_ajax():
-        if request.POST:
-            if request.POST['from'] == 'addtimesheet':
-                selectedWeek = request.POST['selectedWeek']
-                s = " ".join(selectedWeek.split(" ")[1:4])
-                selectDate = datetime.strptime(s, "%b %d %Y").date()
-                hoursList = request.POST.getlist('hoursList[]')
-                addedtask = request.POST.getlist('addedtask[]')
-                taskJson = json.loads(addedtask[0])
-                i = 0
-                leave_list = [x.leave_id for x in leave.objects.all()]
-                for t in taskJson:
-                    hr = json.dumps(hoursList[7*i:7+7*i])
-                    i = i+1
-                    vc = validate_values(t, selectDate, hr, user, leave_list)
-                    if vc == "success":
-                        pass
-                    else:
-                        return JsonResponse({'rc': vc}, safe=False)
-                i = 0
-                for t in taskJson:
-                    hours = json.dumps(hoursList[7*i:7+7*i])
-                    i = i+1
-                    rc = add_prior(t, selectDate, hours, user)
-                return JsonResponse({'rc': rc}, safe=False)
-
-        if request.GET:
-            if request.GET['from'] == 'getTimeSheet':
-                selectedWeek = request.GET['selectedWeek']
-                s = " ".join(selectedWeek.split(" ")[1:4])
-                selectDate = datetime.strptime(s, "%b %d %Y").date()
-                current = fetch_prior('', selectDate, user)
-                return JsonResponse(current, safe=False)
-            if request.GET['from'] == 'getTaskOtherTeam':
-                team_name = request.GET['teamname']
-                task_list = task.objects.filter(task_group=team_name,
-                                                task_status='OP')
-                task_data = []
-                for val in task_list:
-                    json_data = {'taskname': val.task_name,
-                                 'is_billable': val.is_billable
-                                 }
-                    task_data.append(json_data)
-                return JsonResponse(task_data, safe=False)
     parms = {'current_user': user}
     parms['leave_tasks'] = leave.objects.all()
     u = userprofile.objects.get(user_id__username=user.username)
@@ -107,8 +63,8 @@ def fetch_prior(taskid, date, user):
             return timesheetdata
         else:
             return 0
-        
-        
+
+
 def add_prior(t, date, hours, user):
     task_name = t['taskid']
     is_billable = t['billable']

@@ -33,4 +33,6 @@ urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
     url(r'^api/timesheet/', include("current.api.urls", namespace='timesheet-api')),
     url(r'^api/tasks/', include("project.api.urls", namespace='task-api')),
+    url(r'^api/priortime/', include("priortime.api.urls", namespace='priortime-api')),
+    url(r'^api/leave/', include("leave.api.urls", namespace='leave-api')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

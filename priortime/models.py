@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class priorsheet(models.Model):
     taskid = models.CharField(max_length=20)
     date = models.DateField()

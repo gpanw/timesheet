@@ -3,8 +3,9 @@ model ={
 	  getTimeSheet: function(curr){
               parms = {"from": "getTimeSheet"};
               parms["selectedWeek"] = curr
-              $.getJSON(model.hostURL,parms).done(function(response){
-                 control.handle_getTimeSheet(response);
+              var apiURL = "/api/priortime/" + curr;
+              $.getJSON(apiURL, parms).done(function(response){
+                control.handle_getTimeSheet(response);
                }); 
 	  },
 
@@ -13,7 +14,7 @@ model ={
 	  		  parms = {"from": "getTaskOtherTeam"};
 	  		  parms["teamname"] = teamVal;
 	  		  var apiURL = "/api/tasks/" + teamVal;
-	  		  $.getJSON(apiURL,parms).done(function(response){
+	  		  $.getJSON(apiURL, parms).done(function(response){
                  control.handle_getTaskOtherTeam(response);
                }); 
 	  },  
@@ -24,6 +25,7 @@ model ={
 	       parms["selectedWeek"] = selectedWeek;
 	       parms["addedtask[]"] = JSON.stringify(addedtask);
 	       parms["hoursList[]"] = hoursList;
+	       var apiURL = "/api/priortime/" + selectedWeek + '/create/';
 	       $.ajaxSetup({
 	             beforeSend: function(xhr, settings) {
 	                if (!model.csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -34,7 +36,7 @@ model ={
 	       $.ajax({
 	            "type": "POST",
 	            "dataType": "json",
-	            "url": model.hostURL,
+	            "url": apiURL,
 	            "data": parms,
 	            "success": function(response) {
 	                control.handle_addTimeSheet(response)
@@ -113,7 +115,7 @@ viewTimesheet = {
 	       curr = new Date(newdate);
 	       viewTimesheet.getWeekDate(curr);
 	       viewTimesheet.getWeekList();
-	       control.getTimeSheet(viewTimesheet.decrementDate(curr,5)[1]);
+	       control.getTimeSheet(viewTimesheet.decrementDate(curr,5)[2]);
 	       
 	       $('.task-item').click(function(){
 	       	  if (viewTimesheet.editable) {
@@ -165,8 +167,10 @@ viewTimesheet = {
 	              hoursList = passValue[0];
 	              addedtask = passValue[1];
 	              selectedWeek =  $('.selected').text().replace("Current","");
+	              var gg = new Date(selectedWeek);
+	              var date_YYYY_MM_DD = gg.getFullYear() + '-' + (gg.getMonth()+1) + '-' + gg.getDate();
 	              if (addedtask.length > 0 ){
-	                 control.addTimeSheet(selectedWeek, hoursList, addedtask) };
+	                 control.addTimeSheet(date_YYYY_MM_DD, hoursList, addedtask) };
 	            }
 	        }); 
 	       $("#other-team").change(function(){
@@ -206,7 +210,9 @@ viewTimesheet = {
 	       var firstdate = new Date(curr.setDate(x)).toDateString();
 	       var splitdate = firstdate.split(' ');
 	       var returndate = splitdate[0] + ' ' + splitdate[2] + '-' + splitdate[1];
-	       return [returndate, firstdate];  
+	       var gg = new Date(curr.setDate(x));
+	       var date_YYYY_MM_DD = gg.getFullYear() + '-' + (gg.getMonth()+1) + '-' + gg.getDate();
+	       return [returndate, firstdate, date_YYYY_MM_DD];  
 	  },
 	  
 	  getSheetValue: function(){
@@ -218,14 +224,15 @@ viewTimesheet = {
 	          }
 	       })
 
-           var row = 1
+           var i = 1
 	       $("#task-table tr td:first-child").each(function (){
 	            taskid = $(this).find('span.task').text();
 	            billable = $(this).closest("tr").find('.checkbill').prop('checked');
 	            returninfo = {'taskid': taskid,
-	            			  'billable': billable
+	            			  'is_billable': billable,
+	            			  'hours': hoursList.slice(7*i-7,7*i)
 	            			}
-	            row += 1
+	            i += 1
 	            taskList.push(returninfo)
 	       })
 	       taskList.pop();
@@ -266,7 +273,7 @@ viewTimesheet = {
 	           } else {
 	               viewTimesheet.addedtask = []
 	           }
-	           control.getTimeSheet(viewTimesheet.decrementDate(curr,5)[1]);
+	           control.getTimeSheet(viewTimesheet.decrementDate(curr,5)[2]);
 	       })
 	  },
 	  

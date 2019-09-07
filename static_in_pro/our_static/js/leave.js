@@ -1,45 +1,48 @@
 model ={
     hostURL: myURL + "manageleave/",
     getLeave: function(Ldate){
-	       parms = {"from": "getleave"};
-	       parms["Ldate"] = Ldate;
-               $.getJSON(model.hostURL,parms).done(function(response){
-                 control.handlegetLeave(response);
-               }); 
-         },
+	      parms = {"from": "getleave"};
+	      parms["Ldate"] = Ldate;
+        var apiURL = "/api/leave/user/all/date/" + Ldate;
+        $.getJSON(apiURL,parms).done(function(response){
+          control.handlegetLeave(response);
+        }); 
+    },
          
 
 	  addLeave: function(leaveid, Ldate, Lfor, Lrepeat, Lcomment) {
-	       var csrftoken = model.getCookie('csrftoken');
-	       parms = {"from": "addleave"};
-	       parms["leaveid"] = leaveid;
-	       parms["Ldate"] = Ldate;
-	       parms["Lfor"] = Lfor;
-	       parms["Lrepeat"] = Lrepeat;
-	       parms["Lcomment"] = Lcomment;
-	       $.ajaxSetup({
-	             beforeSend: function(xhr, settings) {
-	                if (!model.csrfSafeMethod(settings.type) && !this.crossDomain) {
-	                   xhr.setRequestHeader("X-CSRFToken", csrftoken);
-	                }
-	             }
-	       });
-	       $.ajax({
-	            "type": "POST",
-	            "dataType": "json",
-	            "url": model.hostURL,
-	            "data": parms,
-	            "success": function(response) {
-	                control.handle_addLeave(response);
-	            },
-	            "error": function(response){alert('no')},
-	       });
+      var csrftoken = model.getCookie('csrftoken');
+	    parms = {"from": "addleave"};
+	    parms["leaveid"] = leaveid;
+	    parms["Ldate"] = Ldate;
+	    parms["Lfor"] = Lfor;
+	    parms["Lrepeat"] = Lrepeat;
+	    parms["Lcomment"] = Lcomment;
+      var apiURL = "/api/leave/create/";
+	    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+	        if (!model.csrfSafeMethod(settings.type) && !this.crossDomain) {
+	          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	        }
+	      }
+	    });
+	    $.ajax({
+	      "type": "POST",
+	      "dataType": "json",
+	      "url": apiURL,
+	      "data": parms,
+	      "success": function(response) {
+	        control.handle_addLeave(response)
+	      },
+	      "error": function(response){alert(response)},
+	    });
 	  },
 	  
 	  delLeave: function(del_id){
 	       var csrftoken = model.getCookie('csrftoken');
 	       parms = {"from": "deleteleave"};
 	       parms["del_id"] = del_id;
+         var apiURL = "/api/leave/delete/" + del_id + '/';
 	       $.ajaxSetup({
 	             beforeSend: function(xhr, settings) {
 	                if (!model.csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -48,14 +51,17 @@ model ={
 	             }
 	       });
 	       $.ajax({
-	            "type": "POST",
+	            "type": "DELETE",
 	            "dataType": "json",
-	            "url": model.hostURL,
+	            "url": apiURL,
 	            "data": parms,
 	            "success": function(response) {
-	                control.handle_delLeave(response);
+                del_id = parms["del_id"];
+                control.handle_delLeave(del_id);
 	            },
-	            "error": function(response){alert('no')},
+	            "error": function(response){
+                control.handle_delLeave(result);
+              },
 	       });
 	  },
 
@@ -99,15 +105,16 @@ control = {
   	     model.getLeave(Ldate);  	
   	},
 
-        handlegetLeave: function(response){
-             viewLeave.handlegetLeave(response);        
-         },
-        
-        delLeave: function(del_id){
-             model.delLeave(del_id);
-        },
-  	handle_delLeave: function(response){
-  	     viewLeave.handle_delLeave(response)  	
+    handlegetLeave: function(response){
+          viewLeave.handlegetLeave(response);        
+    },
+       
+    delLeave: function(del_id){
+          model.delLeave(del_id);
+    },
+  	
+    handle_delLeave: function(del_id){
+  	     viewLeave.handle_delLeave(del_id)  	
   	},
 };
 
@@ -118,7 +125,9 @@ viewLeave = {
              a = $('.today').text();
              b=$('.month').text();
              c = a + ' ' + b.split("\n")[1];
-             control.getLeave(c);
+             gg = new Date(c)
+             var date_YYYY_MM_DD = gg.getFullYear() + '-' + (gg.getMonth()+1) + '-' + gg.getDate();
+             control.getLeave(date_YYYY_MM_DD);
              if (a) {
                 $('#id_date').val(c);
              }
@@ -132,7 +141,9 @@ viewLeave = {
                 b=$('.month').text();
                 c = a + ' ' + b.split("\n")[1];
                 $('#id_date').val(c);
-                control.getLeave(c);
+                gg = new Date(c)
+                var date_YYYY_MM_DD = gg.getFullYear() + '-' + (gg.getMonth()+1) + '-' + gg.getDate();
+                control.getLeave(date_YYYY_MM_DD);
              });
              
              $('.add-leave-btn').click(function(){
@@ -155,7 +166,7 @@ viewLeave = {
         handlegetLeave: function(response){
              $('.leaves').remove();
              for(i=0;i<response.length;i++) {
-                 viewLeave.appendtodayLeave(response[i].id,response[i].leaveid,response[i].leavedate,response[i].leavecomment,response[i].leaveuser)
+                 viewLeave.appendtodayLeave(response[i].id,response[i].leaveid,response[i].date,response[i].comment,response[i].user)
              }
              
          },
@@ -174,21 +185,26 @@ viewLeave = {
         },
         
         handle_addLeave: function(response){
-             viewLeave.appendtodayLeave(response[0].id,response[0].leaveid,response[0].leavedate,response[0].leavecomment,response[0].leaveuser)
+          $('.error').remove();
+          if (response.id){
+            viewLeave.appendtodayLeave(response.id,response.leaveid,response.date,response.comment,response.user);
+          }
+          else{
+            a = "<div class='error col-xs-12 leaveerr'>" + response.rc + "</div>"
+            $('.leave-form').append(a);
+          }
         },
 
-        handle_delLeave: function(response){
-             del_id = response.return_id;
-             $('.error').remove();
-             if (del_id){
-                 delObj = $("#"+del_id)
-                 elem = $(delObj).parent().closest('tr');
-                 elem.remove();
-             }else {
-                 appendErr = "<div class='error delerror'>OOPS Unable to delete.Server Error!!!</div>";
-                 $(".leave-table-div").append(appendErr);
-             };
-
+        handle_delLeave: function(del_id){
+          $('.error').remove();
+          if (del_id){
+            delObj = $("#"+del_id)
+            elem = $(delObj).parent().closest('tr');
+            elem.remove();
+          }else {
+            appendErr = "<div class='error delerror'>OOPS Unable to delete.Server Error!!!</div>";
+            $(".leave-table-div").append(appendErr);
+          };
         },
 
 };

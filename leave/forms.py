@@ -35,6 +35,5 @@ class applyleaveForm(forms.Form):
     leaveid = forms.ChoiceField(choices=tuple(leaves))
     date = forms.CharField(initial='select Date from Calendar')
     users = forms.ChoiceField()
-    repeat = forms.IntegerField(min_value=0, initial=0, required=False)
     comment = forms.CharField(max_length=20, required=False)
 

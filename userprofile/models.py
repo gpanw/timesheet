@@ -57,7 +57,7 @@ class userprofile(models.Model):
     def save(self, *args, **kwargs):
         try:
             this = userprofile.objects.get(id=self.id)
-            if this.profile_photo.name == '/profilepics/images.png':
+            if this.profile_photo.name == self.profile_photo.name:
                 pass
             else:
                 this.profile_photo.delete(save=False)

@@ -35,4 +35,5 @@ urlpatterns = [
     url(r'^api/tasks/', include("project.api.urls", namespace='task-api')),
     url(r'^api/priortime/', include("priortime.api.urls", namespace='priortime-api')),
     url(r'^api/leave/', include("leave.api.urls", namespace='leave-api')),
+    url(r'^api/reports/', include("reports.api.urls", namespace='reports-api')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

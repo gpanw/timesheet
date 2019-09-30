@@ -29,4 +29,5 @@ def handling_leaves_on_delete_time_entry(sender, instance, using, **kwargs):
         u.save()
     if t[0] == 'CL':
         u.casual_leave = str(float(u.casual_leave) + instance.current_sum_hours)
-        u.save()
+        if float(u.casual_leave) < 100.00:
+            u.save()

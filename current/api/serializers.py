@@ -15,7 +15,6 @@ from utils.projectsutils import get_friday
 
 
 class TimesheetDetailSerializer(ModelSerializer):
-    sum_hours = SerializerMethodField()
     hours = SerializerMethodField()
 
     class Meta:
@@ -29,9 +28,6 @@ class TimesheetDetailSerializer(ModelSerializer):
             'approved',
             'approved_by',
         ]
-
-    def get_sum_hours(self, obj):
-        return obj.sum_hours
 
     def get_hours(self, obj):
         jsonDec = json.decoder.JSONDecoder()
@@ -76,12 +72,12 @@ class TimesheetCreateUpdateSerializer(ModelSerializer):
         hr = json_dec.decode(data['hours'])
         if task_name.split(' - ')[0] in leave_list:
             u = userprofile.objects.get(user_id__username=user)
-            if task_name == 'EL':
+            if task_name.split(' - ')[0] == 'EL':
                 if sum([float(x) for x in hr]) > u.earned_leave:
-                    raise ValidationError("earned leaves exceeded the limit")
-            if task_name == 'CL':
+                    raise ValidationError("You do not have enough Earned Leave!!!")
+            if task_name.split(' - ')[0] == 'CL':
                 if sum([float(x) for x in hr]) > u.casual_leave:
-                    raise ValidationError("casual leaves exceeded the limit")
+                    raise ValidationError("You do not have enough Casual Leaves!!!")
         else:
             try:
                 get_task_id = task.objects.get(task_name=task_name,

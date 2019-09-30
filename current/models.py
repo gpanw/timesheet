@@ -7,6 +7,7 @@ class timesheet(models.Model):
     taskid = models.CharField(max_length=20)
     date = models.DateField()
     hours = models.CharField(max_length=56, default=["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0"])
+    sum_hours = models.PositiveSmallIntegerField(default=0)
     user = models.CharField(max_length=20)
     user_role = models.CharField(max_length=20, null=True, blank=True)
     user_skill = models.CharField(max_length=20, null=True, blank=True)
@@ -27,9 +28,6 @@ class timesheet(models.Model):
         self.approved_by = u.userprofile.manager_id
         self.user_skill = u.userprofile.user_skill
         self.user_role = u.userprofile.user_role
+        jsonDecode = json.decoder.JSONDecoder()
+        self.sum_hours = sum([float(i) for i in jsonDecode.decode(self.hours)])
         super(timesheet, self).save(*args, **kwargs)
-
-    @property
-    def sum_hours(self):
-        jsonDec = json.decoder.JSONDecoder()
-        return sum([float(i) for i in jsonDec.decode(self.hours)])

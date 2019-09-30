@@ -468,6 +468,7 @@ def taskreports(request, team_id=None):
                 values = timesheet.objects.values('date') \
                     .annotate(week_sum=Sum('sum_hours')) \
                     .filter(**kwargs).order_by('date')
+                print('g1111111', values)
                 return_date_data = []
                 if values:
                     init_date = values[0]['date']

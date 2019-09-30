@@ -10,8 +10,8 @@ def getprofile(request):
     user = request.user
     form = UserprofileForm
     parms = {'current_user': user}
-    parms['lastname'] = user.last_name
-    parms['firstname'] = user.first_name
+    parms['lastname'] = user.last_name.title()
+    parms['firstname'] = user.first_name.title()
     parms['email'] = user.email
     parms['is_manager'] = user.is_staff
     try:

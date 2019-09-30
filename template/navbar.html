@@ -18,20 +18,49 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
-            <li class="nav-element" id="nav-timesheet"><a href="/timesheet">Timesheet</a></li>
-            <li class="nav-element" id="nav-priortime"><a href="/priortime">Prior Time</a></li>
-            <li class="nav-element" id="nav-leave"><a href="/leave">Leave Tracker</a></li>
+            <li class="nav-element" id="nav-timesheet">
+              <a href="/timesheet">
+                <p class="glyph-custom-nav-p mobile-no-display">
+                  <span class="glyphicon glyphicon-time glyph-custom-nav" aria-hidden="true"></span>
+                </p>
+                <div>Timesheet</div>
+              </a>
+            </li>
+            <li class="nav-element" id="nav-priortime">
+              <a href="/priortime">
+                <p class="glyph-custom-nav-p mobile-no-display">
+                  <span class="glyphicon glyphicon-backward glyph-custom-nav" aria-hidden="true"></span>
+                </p>
+                <div>Prior Time</div>
+              </a>
+            </li>
+            <li class="nav-element" id="nav-leave">
+              <a href="/leave">
+                <p class="glyph-custom-nav-p mobile-no-display">
+                  <span class="glyphicon glyphicon-list-alt glyph-custom-nav" aria-hidden="true"></span>
+                </p>
+                <div>Leave Tracker</div>
+              </a>
+            </li>
             {% if is_manager %}
-            <li class ="nav-element class-nav-reports" id="id-nav-reports"><a href="/reports">Reports & Graphs</a></li>
+            <li class ="nav-element class-nav-reports" id="id-nav-reports">
+              <a href="/reports">
+                <p class="glyph-custom-nav-p mobile-no-display">
+                  <span class="glyphicon glyphicon-picture glyph-custom-nav" aria-hidden="true"></span>
+                </p>
+                <div>Reports & Graphs</div>
+              </a>
+            </li>
             <li class ="nav-element class-nav-reports" id="id-nav-reports"><a href="/admin">Go To Admin Site</a></li>
             {% endif %}
             <li class="dropdown nav-element" id="nav-user">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <span>
-                  <img  src="{{ current_user.userprofile.profile_photo.url }}" height="32" width="32" class="img-circle avatar">
-                </span>
-                <!--<span>{{ current_user }}</span> -->
-                <span class="caret"></span>
+                <p>
+                  <span>
+                    <img  src="{{ current_user.userprofile.profile_photo.url }}" height="38" width="38" class="img-circle avatar">
+                  </span>
+                  <span class="caret"></span>
+                </p>
               </a>
               <ul class="dropdown-menu">
                 <li class="profile-dropdown">

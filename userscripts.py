@@ -16,8 +16,8 @@ import random
 def main():
     #add_user()
     #add_team()
-    add_userprofile()
-    #add_timesheet()
+    #add_userprofile()
+    add_timesheet()
 
 
 def add_user():
@@ -113,7 +113,7 @@ def add_timesheet():
         print(u.username)
         team_name = team_obj.team_name
         manager = team_obj.team_lead
-        fill_date = '2017-12-29'
+        fill_date = '2018-10-05'
         dateobj = datetime.strptime(fill_date, '%Y-%m-%d')
         for d in range(1, 52):
             dateobj = dateobj + timedelta(7)
